@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 
-const SlideShow = ({ datos }) => {
+const SlideShow = ({ datos, showSlideBar, colorSlideBar }) => {
 
     const [actual, setActual] = useState(0);
     const slideLength = datos.length;
@@ -14,9 +14,11 @@ const SlideShow = ({ datos }) => {
     const prevSlide = () => {
         setActual(actual === 0 ? slideLength - 1 : actual - 1);
     }
+  
 
 
     return (
+        <div className='slideShowContainer'>
         <div className='slideShow'>
             <button className='flechaIzquierda' onClick={prevSlide} >
                 <AiOutlineArrowLeft size={'1.5rem'} />
@@ -46,7 +48,15 @@ const SlideShow = ({ datos }) => {
             )}
             
         </div>
+        {showSlideBar ?
+            <div className="slideBar">
+                <span style={{width: (actual + 1) * 100 / slideLength + "%", backgroundColor: colorSlideBar ? colorSlideBar : '#000'}}></span>
+            </div>
+        : null}
+        </div>
     )
 }
 
-export default SlideShow
+
+
+export  default SlideShow
